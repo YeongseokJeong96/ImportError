@@ -1,0 +1,63 @@
+%time ta_timeseries.load()
+
+xarray.DataArraytime: 9612lev: 33
+array([[0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       ...,
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.]], dtype=float32)
+Coordinates:
+lev
+(lev)
+float64
+0.0 10.0 20.0 ... 5e+03 5.5e+03
+time
+(time)
+object
+3180-01-16 12:00:00 ... 3980-12-...
+Attributes: (0)
+
+ta_timeseries.plot(label='monthly')
+ta_timeseries.rolling(time=12).mean().plot(label='12 month rolling mean')
+plt.legend()
+plt.title('Sea Water Potential Temperature')
+
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+<ipython-input-10-14f5f3976d85> in <module>
+----> 1 ta_timeseries.plot(label='monthly')
+      2 ta_timeseries.rolling(time=12).mean().plot(label='12 month rolling mean')
+      3 plt.legend()
+      4 plt.title('Sea Water Potential Temperature')
+
+/opt/anaconda3/lib/python3.6/site-packages/xarray/plot/plot.py in __call__(self, **kwargs)
+    444 
+    445     def __call__(self, **kwargs):
+--> 446         return plot(self._da, **kwargs)
+    447 
+    448     # we can't use functools.wraps here since that also modifies the name / qualname
+
+/opt/anaconda3/lib/python3.6/site-packages/xarray/plot/plot.py in plot(darray, row, col, col_wrap, ax, hue, rtol, subplot_kws, **kwargs)
+    198     kwargs["ax"] = ax
+    199 
+--> 200     return plotfunc(darray, **kwargs)
+    201 
+    202 
+
+/opt/anaconda3/lib/python3.6/site-packages/xarray/plot/plot.py in newplotfunc(darray, x, y, figsize, size, aspect, ax, row, col, col_wrap, xincrease, yincrease, add_colorbar, add_labels, vmin, vmax, cmap, center, robust, extend, levels, infer_intervals, colors, subplot_kws, cbar_ax, cbar_kwargs, xscale, yscale, xticks, yticks, xlim, ylim, norm, **kwargs)
+    695         yplt, ylab_extra = _resolve_intervals_2dplot(yval, plotfunc.__name__)
+    696 
+--> 697         _ensure_plottable(xplt, yplt, zval)
+    698 
+    699         cmap_params, cbar_kwargs = _process_cmap_cbar_kwargs(
+
+/opt/anaconda3/lib/python3.6/site-packages/xarray/plot/utils.py in _ensure_plottable(*args)
+    600         ):
+    601             raise ImportError(
+--> 602                 "Plotting of arrays of cftime.datetime "
+    603                 "objects or arrays indexed by "
+    604                 "cftime.datetime objects requires the "
+
+ImportError: Plotting of arrays of cftime.datetime objects or arrays indexed by cftime.datetime objects requires the optional `nc-time-axis` (v1.2.0 or later) package.
